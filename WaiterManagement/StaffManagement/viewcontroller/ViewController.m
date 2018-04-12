@@ -16,6 +16,7 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
 @interface ViewController ()
 @property IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSArray *waiters;
+@property (nonatomic, retain) Restaurant *restaurant;
 @end
 
 @implementation ViewController
@@ -24,7 +25,9 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
     NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
-    self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
+    self.restaurant = [[RestaurantManager sharedManager]currentRestaurant];
+//    self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
+    self.waiters = [self.restaurant.staff sortedArrayUsingDescriptors:@[sortByName]];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -48,4 +51,5 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"showWaiter" sender:self];
 }
+
 @end

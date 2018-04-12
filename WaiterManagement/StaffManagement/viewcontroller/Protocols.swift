@@ -17,7 +17,8 @@ protocol WaiterDelegate {
 
 extension ViewController {
     override open func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showWaiter",
+        if segue.identifier == "showWaiter" ||
+            segue.identifier == "addWaiter",
             let view = segue.destination as? WaiterViewController {
             view.delegate = self
         }
@@ -27,7 +28,34 @@ extension ViewController {
 
 extension ViewController: WaiterDelegate {
     func addWaiter(_ name: String) {
-        print("add")
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+
+        let managedContext: NSManagedObjectContext = appDelegate.managedObjectContext
+//        let entity = NSEntityDescription.entity(forEntityName: "Waiter", in: managedContext)
+//        let newWaiter = NSManagedObject(entity: entity!, insertInto: managedContext)
+//        newWaiter.setValue(name, forKey: "name")
+        if #available(iOS 10.0, *) {
+            let newWaiter = Waiter(context: managedContext)
+            newWaiter.name = name
+//            waiters.append(newWaiter)
+//            newWaiter.
+            restaurant.addStaffObject(newWaiter)
+            waiters.append(newWaiter)
+            tableView.reloadData()
+        } else {
+            // Fallback on earlier versions
+        }
+        
+
+        do {
+            try managedContext.save()
+        } catch {
+            print("Failed to save")
+        }
+
     }
     
     func deleteWaiter(_ name: String) {
@@ -44,3 +72,11 @@ extension ViewController: WaiterDelegate {
     
     
 }
+
+//extension RestaurantManager {
+//
+//    func save(_ name: String) {
+//
+//
+//    }
+//}

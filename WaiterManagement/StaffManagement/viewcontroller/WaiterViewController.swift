@@ -17,6 +17,9 @@ class WaiterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButton))
+        
         showData()
 
         
@@ -34,6 +37,13 @@ class WaiterViewController: UIViewController {
         }
     }
     
+    @objc private func saveButton() {
+        if let delegate = self.delegate,
+            let name = waiterName.text {
+            delegate.addWaiter(name)
+        }
+        navigationController?.popViewController(animated: true)
+    }
 
     /*
     // MARK: - Navigation
