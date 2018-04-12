@@ -23,6 +23,9 @@
     });
     return sharedManager;
 }
+
+// If there is a restaurant, read the data from coredata.
+// If not, it creates the restaurant, and the waiter "John Smith".
 -(Restaurant*)currentRestaurant{
     if(self.restaurant == nil)
     {

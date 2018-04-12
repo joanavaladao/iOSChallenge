@@ -45,4 +45,7 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     cell.textLabel.text = waiter.name;
     return cell;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"showWaiter" sender:self];
+}
 @end
