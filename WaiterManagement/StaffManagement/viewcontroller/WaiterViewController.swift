@@ -8,18 +8,33 @@
 
 import UIKit
 
+protocol ShiftDataDelegate {
+    func showShiftList()
+    func showShiftDetail()
+    func addShift(start: Date, end: Date)
+    func deleteShift()
+}
+
+struct Shift: Equatable {
+    var start: Date
+    var end: Date
+}
+
 class WaiterViewController: UIViewController {
 
     var delegate: WaiterDelegate?
     var name: String?
+    var shiftList: ShiftListDelegate?
+    var shiftDetail: ShiftDetailDelegate?
+    var shifts: [Shift] = []
     
     @IBOutlet weak var waiterName: UITextField!
+    @IBOutlet weak var shiftListContainer: UIView!
+    @IBOutlet weak var shiftDetailContainer: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButton))
-        
         showData()
     }
 
@@ -32,6 +47,7 @@ class WaiterViewController: UIViewController {
         if let name = delegate?.getName() {
             waiterName.text = name
         }
+        showShiftList()
     }
     
     @objc private func saveButton() {
@@ -41,15 +57,68 @@ class WaiterViewController: UIViewController {
         }
         navigationController?.popViewController(animated: true)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    // MARK: Action
+    @IBAction func addShift(_ sender: UIButton) {
+        showShiftDetail()
     }
-    */
+    
+    // MARK: Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? ShiftListDelegate {
+            self.shiftList = viewController
+            self.shiftList?.setDelegate(self)
+        } else if let viewController = segue.destination as? ShiftDetailDelegate {
+            self.shiftDetail = viewController
+            self.shiftDetail?.setDelegate(self)
+        }
+    }
+    
+    private func validaShift(shift1: Shift, shift2: Shift) -> Bool {
+        if (shift1.start >= shift2.start && shift1.start < shift2.end) ||
+            (shift1.end > shift2.start && shift1.end <= shift2.end) ||
+            (shift2.start >= shift1.start && shift2.start < shift1.end) ||
+            (shift2.end > shift1.start && shift2.end <= shift1.end) {
+            return false
+        }
+        return true
+    }
+    
+    func validaShift(start: Date, end: Date) -> Bool{
+        if shifts.count > 0 {
+            for shift in shifts {
+                if !validaShift(shift1: shift, shift2: Shift(start: start, end: end)) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+}
 
+extension WaiterViewController: ShiftDataDelegate {  
+    func showShiftList() {
+        shiftDetailContainer.isHidden = true
+        shiftListContainer.isHidden = false
+    }
+    
+    func showShiftDetail() {
+        shiftListContainer.isHidden = true
+        shiftDetailContainer.isHidden = false
+    }
+    
+    func addShift(start: Date, end: Date) {
+        if validaShift(start: start, end: end) {
+            shifts.append(Shift(start: start, end: end))
+            showShiftList()
+            print("***** SHIFTS: \(shifts)")
+        } else {
+            //TODO: show alert
+            print("shift invalido")
+        }
+    }
+    
+    func deleteShift() {
+        
+    }
 }

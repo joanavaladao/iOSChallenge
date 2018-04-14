@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B7D8F56208235CA00231072 /* ShiftListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7D8F55208235CA00231072 /* ShiftListViewController.swift */; };
+		5B7D8F58208235F200231072 /* ShiftDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7D8F57208235F200231072 /* ShiftDetailViewController.swift */; };
 		5BB87F7C207EF99F00491ABD /* WaiterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB87F7B207EF99F00491ABD /* WaiterViewController.swift */; };
 		5BB87F7E207F096000491ABD /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB87F7D207F096000491ABD /* Protocols.swift */; };
 		5BB87F80208066D500491ABD /* WaiterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB87F7F208066D500491ABD /* WaiterTableViewCell.swift */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5B7D8F55208235CA00231072 /* ShiftListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftListViewController.swift; sourceTree = "<group>"; };
+		5B7D8F57208235F200231072 /* ShiftDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftDetailViewController.swift; sourceTree = "<group>"; };
 		5BB87F7A207EF99F00491ABD /* StaffManagement-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StaffManagement-Bridging-Header.h"; sourceTree = "<group>"; };
 		5BB87F7B207EF99F00491ABD /* WaiterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaiterViewController.swift; sourceTree = "<group>"; };
 		5BB87F7D207F096000491ABD /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -83,10 +87,12 @@
 			children = (
 				651CBBB61AB4E1CD00F265E8 /* ViewController.h */,
 				651CBBB71AB4E1CD00F265E8 /* ViewController.m */,
-				5BB87F7B207EF99F00491ABD /* WaiterViewController.swift */,
+				5BB87F7F208066D500491ABD /* WaiterTableViewCell.swift */,
 				5BB87F7A207EF99F00491ABD /* StaffManagement-Bridging-Header.h */,
 				5BB87F7D207F096000491ABD /* Protocols.swift */,
-				5BB87F7F208066D500491ABD /* WaiterTableViewCell.swift */,
+				5BB87F7B207EF99F00491ABD /* WaiterViewController.swift */,
+				5B7D8F55208235CA00231072 /* ShiftListViewController.swift */,
+				5B7D8F57208235F200231072 /* ShiftDetailViewController.swift */,
 			);
 			path = viewcontroller;
 			sourceTree = "<group>";
@@ -270,10 +276,12 @@
 				651CBBB51AB4E1CD00F265E8 /* StaffManagement.xcdatamodeld in Sources */,
 				5BB87F7E207F096000491ABD /* Protocols.swift in Sources */,
 				651CBBB21AB4E1CC00F265E8 /* AppDelegate.m in Sources */,
+				5B7D8F56208235CA00231072 /* ShiftListViewController.swift in Sources */,
 				651CBBB81AB4E1CD00F265E8 /* ViewController.m in Sources */,
 				651CBBDD1AB4E4A100F265E8 /* Waiter.m in Sources */,
 				5BB87F80208066D500491ABD /* WaiterTableViewCell.swift in Sources */,
 				651CBBDA1AB4E4A000F265E8 /* Restaurant.m in Sources */,
+				5B7D8F58208235F200231072 /* ShiftDetailViewController.swift in Sources */,
 				651CBBAF1AB4E1CC00F265E8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

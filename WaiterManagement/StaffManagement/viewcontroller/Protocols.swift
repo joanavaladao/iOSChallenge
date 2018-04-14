@@ -17,9 +17,7 @@ protocol WaiterDelegate {
 
 extension ViewController {
     override open func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showWaiter" ||
-            segue.identifier == "addWaiter",
-            let view = segue.destination as? WaiterViewController {
+        if let view = segue.destination as? WaiterViewController {
             view.delegate = self
         }
     }
@@ -109,5 +107,10 @@ extension ViewController: UITableViewDataSource {
         waiters.remove(at: indexPath.row)
         tableView.reloadData()
     }
-    
 }
+
+//extension ViewController: UITableViewDelegate {
+//    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        <#code#>
+//    }
+//}

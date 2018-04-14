@@ -47,7 +47,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="coB-sX-a0E" id="dFv-3t-aVI"/>
-                                            <segue destination="zMf-n7-21U" kind="show" identifier="showWaiter" id="gci-y7-ak5"/>
+                                            <segue destination="zMf-n7-21U" kind="show" identifier="showWaiter" id="dgI-FF-lZY"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -68,7 +68,7 @@
                     <navigationItem key="navigationItem" id="ha4-Ah-17l">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="pvB-Ab-x8I">
                             <connections>
-                                <segue destination="zMf-n7-21U" kind="show" identifier="addWaiter" id="w6o-uF-0B8"/>
+                                <segue destination="zMf-n7-21U" kind="show" identifier="addWaiter" id="f0W-0S-nXn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -128,9 +128,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TX3-rc-RxP">
-                                <rect key="frame" x="337" y="123.5" width="30" height="30"/>
-                                <state key="normal" title="+"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TX3-rc-RxP">
+                                <rect key="frame" x="331" y="129.5" width="36" height="24"/>
+                                <state key="normal" title="+" image="add"/>
+                                <connections>
+                                    <action selector="addShift:" destination="zMf-n7-21U" eventType="touchUpInside" id="3ov-j3-Pqs"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -159,6 +162,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="shiftDetailContainer" destination="Z8v-fC-NeA" id="011-0R-Fvu"/>
+                        <outlet property="shiftListContainer" destination="d3x-tU-as3" id="Zlq-aS-WOa"/>
                         <outlet property="waiterName" destination="ynS-PP-bgn" id="PcY-FV-fHe"/>
                     </connections>
                 </viewController>
@@ -184,10 +189,10 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="30.134932533733135"/>
         </scene>
-        <!--View Controller-->
+        <!--Shift List View Controller-->
         <scene sceneID="ZCs-Rd-KGE">
             <objects>
-                <viewController id="GTa-Mt-rQO" sceneMemberID="viewController">
+                <viewController id="GTa-Mt-rQO" customClass="ShiftListViewController" customModule="StaffManagement" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="e2I-bn-1IM"/>
                         <viewControllerLayoutGuide type="bottom" id="8XG-wj-J84"/>
@@ -207,12 +212,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khX-dL-HjY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1477.5999999999999" y="803.74812593703155"/>
+            <point key="canvasLocation" x="1775" y="730"/>
         </scene>
-        <!--View Controller-->
+        <!--Shift Detail View Controller-->
         <scene sceneID="B3W-vz-Vfb">
             <objects>
-                <viewController id="zyH-vd-EWi" sceneMemberID="viewController">
+                <viewController id="zyH-vd-EWi" customClass="ShiftDetailViewController" customModule="StaffManagement" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SLg-gT-t13"/>
                         <viewControllerLayoutGuide type="bottom" id="ceT-1t-Dk1"/>
@@ -270,10 +275,16 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dd9-HA-nn3">
                                                                 <rect key="frame" x="0.0" y="0.0" width="175.5" height="30"/>
                                                                 <state key="normal" title="Save"/>
+                                                                <connections>
+                                                                    <action selector="saveShift:" destination="zyH-vd-EWi" eventType="touchUpInside" id="V3h-yX-8E4"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHu-bu-B2P">
                                                                 <rect key="frame" x="183.5" y="0.0" width="175.5" height="30"/>
                                                                 <state key="normal" title="Cancel"/>
+                                                                <connections>
+                                                                    <action selector="cancel:" destination="zyH-vd-EWi" eventType="touchUpInside" id="aju-Yx-2Q7"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
@@ -318,13 +329,20 @@
                             <constraint firstItem="aLN-70-qpJ" firstAttribute="top" secondItem="lzN-Yv-qeH" secondAttribute="top" id="JIA-PF-vNI"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="endShiftTextField" destination="I96-Yd-hx2" id="aT4-3V-iYK"/>
+                        <outlet property="startShiftTextField" destination="4cr-wt-v8d" id="PVI-lO-4iv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NCt-Tn-sPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2664.8000000000002" y="150.67466266866569"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="add" width="24" height="24"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="w6o-uF-0B8"/>
+        <segue reference="f0W-0S-nXn"/>
     </inferredMetricsTieBreakers>
 </document>
