@@ -22,6 +22,7 @@ class ShiftDetailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var startShiftTextField: UITextField!
     @IBOutlet weak var endShiftTextField: UITextField!
     
+    var id: Int?
     var startDate: Date?
     var endDate: Date?
     
@@ -65,11 +66,11 @@ class ShiftDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func handleStartDate(sender: UIDatePicker) {
-        startDate = handleDatePicker(sender: sender, textField: startShiftTextField)
+        startDate = truncateSecond(date: handleDatePicker(sender: sender, textField: startShiftTextField))
     }
 
     @objc func handleEndDate(sender: UIDatePicker) {
-        endDate = handleDatePicker(sender: sender, textField: endShiftTextField)
+        endDate = truncateSecond(date: handleDatePicker(sender: sender, textField: endShiftTextField))
     }
     
     @objc func doneClick(sender: UIDatePicker) {
@@ -97,7 +98,7 @@ class ShiftDetailViewController: UIViewController, UITextFieldDelegate {
         if validateShift(),
             let startDate = startDate,
             let endDate = endDate {
-            delegate?.addShift(start: startDate, end: endDate)
+            delegate?.addShift(id: id, start: startDate, end: endDate)
         }
     }
     
@@ -126,6 +127,14 @@ class ShiftDetailViewController: UIViewController, UITextFieldDelegate {
         }
         return false
     }
+    
+    private func truncateSecond(date: Date) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let dateString = dateFormatter.string(from: date)
+        
+        return dateFormatter.date(from: dateString)!
+    }
 }
 
 extension ShiftDetailViewController: ShiftDetailDelegate {
@@ -146,8 +155,4 @@ extension ShiftDetailViewController: ShiftDetailDelegate {
     }
 }
 
-extension Date {
-    var localizedDescription: String {
-        return description(with: .current)
-    }
-}
+

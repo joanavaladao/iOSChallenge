@@ -9,7 +9,7 @@
 import Foundation
 
 protocol WaiterDelegate {
-    func addWaiter(_ name: String)
+    func addWaiter(_ name: String, shifts: [ShiftStructure])
     func deleteWaiter(_ name: String)
     func getName() -> String
 }
@@ -25,16 +25,21 @@ extension ViewController {
 }
 
 extension ViewController: WaiterDelegate {
-    func addWaiter(_ name: String) {
+    func addWaiter(_ name: String, shifts: [ShiftStructure]) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
 
         let managedContext: NSManagedObjectContext = appDelegate.managedObjectContext
+        managedContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         if #available(iOS 10.0, *) {
             let newWaiter = Waiter(context: managedContext)
             newWaiter.name = name
+            for shift in shifts {
+//                let newShift = Shift(
+            }
+            
             restaurant.addStaffObject(newWaiter)
             waiters.append(newWaiter)
             tableView.reloadData()
@@ -109,8 +114,10 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
-//extension ViewController: UITableViewDelegate {
-//    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        <#code#>
-//    }
-//}
+extension Date {
+    var localizedDescription: String {
+        return description(with: .current)
+    }
+    
+
+}

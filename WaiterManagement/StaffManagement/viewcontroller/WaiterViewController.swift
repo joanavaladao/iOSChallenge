@@ -11,15 +11,28 @@ import UIKit
 protocol ShiftDataDelegate {
     func showShiftList()
     func showShiftDetail()
-    func addShift(start: Date, end: Date)
+    func addShift(id: Int?, start: Date, end: Date)
     func quantityOfShifts() -> Int
-    func shiftAt(_ index: Int) -> Shift?
+    func shiftAt(_ index: Int) -> ShiftStructure?
     func deleteShift()
 }
 
-struct Shift: Equatable {
+struct ShiftStructure {
+    var id: Int? = nil
     var start: Date
     var end: Date
+    
+    init(startDate: Date, endDate: Date) {
+        id = nil
+        start = startDate
+        end = endDate
+    }
+    
+    init(id: Int, startDate: Date, endDate: Date) {
+        self.id = id
+        start = startDate
+        end = endDate
+    }
 }
 
 class WaiterViewController: UIViewController {
@@ -28,7 +41,7 @@ class WaiterViewController: UIViewController {
     var name: String?
     var shiftList: ShiftListDelegate?
     var shiftDetail: ShiftDetailDelegate?
-    var shifts: [Shift] = []
+    var shifts: [ShiftStructure] = []
     
     @IBOutlet weak var waiterName: UITextField!
     @IBOutlet weak var shiftListContainer: UIView!
@@ -55,7 +68,7 @@ class WaiterViewController: UIViewController {
     @objc private func saveButton() {
         if let delegate = self.delegate,
             let name = waiterName.text {
-            delegate.addWaiter(name)
+            delegate.addWaiter(name, shifts: shifts)
         }
         navigationController?.popViewController(animated: true)
     }
@@ -76,7 +89,7 @@ class WaiterViewController: UIViewController {
         }
     }
     
-    private func validaShift(shift1: Shift, shift2: Shift) -> Bool {
+    private func validaShift(shift1: ShiftStructure, shift2: ShiftStructure) -> Bool {
         if (shift1.start >= shift2.start && shift1.start < shift2.end) ||
             (shift1.end > shift2.start && shift1.end <= shift2.end) ||
             (shift2.start >= shift1.start && shift2.start < shift1.end) ||
@@ -86,20 +99,27 @@ class WaiterViewController: UIViewController {
         return true
     }
     
-    func validaShift(start: Date, end: Date) -> Bool{
+    func validaShift(start: Date, end: Date) -> Bool {
         if shifts.count > 0 {
             for shift in shifts {
-                if !validaShift(shift1: shift, shift2: Shift(start: start, end: end)) {
+                if !validaShift(shift1: shift, shift2: ShiftStructure(startDate: start, endDate: end)) {
                     return false
                 }
             }
         }
         return true
     }
+    
+    func maxID() -> Int{
+        let max = shifts.max(by: {(a, b) -> Bool in
+            return a.id ?? 0 < b.id ?? 0
+        })
+        return max?.id ?? 0
+    }
 }
 
 extension WaiterViewController: ShiftDataDelegate {
-    func shiftAt(_ index: Int) -> Shift? {
+    func shiftAt(_ index: Int) -> ShiftStructure? {
         print("shifts: \(shifts.count), index: \(index)")
         if shifts.count > 0 && index < shifts.count {
             return shifts[index]
@@ -121,9 +141,10 @@ extension WaiterViewController: ShiftDataDelegate {
         shiftDetailContainer.isHidden = false
     }
     
-    func addShift(start: Date, end: Date) {
+    func addShift(id: Int?, start: Date, end: Date) {
         if validaShift(start: start, end: end) {
-            shifts.append(Shift(start: start, end: end))
+            let id = maxID()
+            shifts.append(ShiftStructure(id: id+1, startDate: start, endDate: end))
             if let shiftList = shiftList {
                 shiftList.reload()
             }
