@@ -21,9 +21,6 @@ class WaiterViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButton))
         
         showData()
-
-        
-        
     }
 
     override func didReceiveMemoryWarning() {

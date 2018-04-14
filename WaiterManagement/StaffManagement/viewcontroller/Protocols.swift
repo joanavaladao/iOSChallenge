@@ -10,7 +10,7 @@ import Foundation
 
 protocol WaiterDelegate {
     func addWaiter(_ name: String)
-    func deleteWaiter(_ name: String)
+    func deleteWaiter(_ name: String, index: Int)
     func getName() -> String
 }
 
@@ -58,8 +58,29 @@ extension ViewController: WaiterDelegate {
 
     }
     
-    func deleteWaiter(_ name: String) {
-        print("delete")
+    @objc func deleteWaiter(_ name: String) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+
+        let managedContext: NSManagedObjectContext = appDelegate.managedObjectContext
+        if #available(iOS 10.0, *) {
+            let fetchRequest: NSFetchRequest<Waiter> = Waiter.fetchRequest() as! NSFetchRequest<Waiter>
+            fetchRequest.predicate = NSPredicate.init(format: "name==\"\(name)\"")
+            if let result = try? managedContext.fetch(fetchRequest) {
+                for object in result {
+                    managedContext.delete(object)
+                }
+                do {
+                    try managedContext.save()
+                } catch {
+                    print ("There was an error")
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        
     }
     
     func getName() -> String {
@@ -73,10 +94,27 @@ extension ViewController: WaiterDelegate {
     
 }
 
-//extension RestaurantManager {
-//
-//    func save(_ name: String) {
-//
-//
-//    }
-//}
+extension ViewController: UITableViewDataSource {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return waiters.count
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "waiterCell", for:indexPath) as? WaiterTableViewCell {
+            let waiter = waiters[indexPath.row] as! Waiter
+            cell.nameLabel.text = waiter.name
+            return cell
+        }
+        
+        return UITableViewCell()
+    }
+    
+    
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        let waiter = waiters[indexPath.row] as! Waiter
+        deleteWaiter(waiter.name)
+        waiters.remove(at: indexPath.row)
+        tableView.reloadData()
+    }
+    
+}

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5BB87F7C207EF99F00491ABD /* WaiterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB87F7B207EF99F00491ABD /* WaiterViewController.swift */; };
 		5BB87F7E207F096000491ABD /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB87F7D207F096000491ABD /* Protocols.swift */; };
+		5BB87F80208066D500491ABD /* WaiterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB87F7F208066D500491ABD /* WaiterTableViewCell.swift */; };
 		651CBBAF1AB4E1CC00F265E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 651CBBAE1AB4E1CC00F265E8 /* main.m */; };
 		651CBBB21AB4E1CC00F265E8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 651CBBB11AB4E1CC00F265E8 /* AppDelegate.m */; };
 		651CBBB51AB4E1CD00F265E8 /* StaffManagement.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 651CBBB31AB4E1CD00F265E8 /* StaffManagement.xcdatamodeld */; };
@@ -36,6 +37,7 @@
 		5BB87F7A207EF99F00491ABD /* StaffManagement-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StaffManagement-Bridging-Header.h"; sourceTree = "<group>"; };
 		5BB87F7B207EF99F00491ABD /* WaiterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaiterViewController.swift; sourceTree = "<group>"; };
 		5BB87F7D207F096000491ABD /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		5BB87F7F208066D500491ABD /* WaiterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaiterTableViewCell.swift; sourceTree = "<group>"; };
 		651CBBA91AB4E1CC00F265E8 /* StaffManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StaffManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		651CBBAD1AB4E1CC00F265E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		651CBBAE1AB4E1CC00F265E8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				5BB87F7B207EF99F00491ABD /* WaiterViewController.swift */,
 				5BB87F7A207EF99F00491ABD /* StaffManagement-Bridging-Header.h */,
 				5BB87F7D207F096000491ABD /* Protocols.swift */,
+				5BB87F7F208066D500491ABD /* WaiterTableViewCell.swift */,
 			);
 			path = viewcontroller;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				651CBBB21AB4E1CC00F265E8 /* AppDelegate.m in Sources */,
 				651CBBB81AB4E1CD00F265E8 /* ViewController.m in Sources */,
 				651CBBDD1AB4E4A100F265E8 /* Waiter.m in Sources */,
+				5BB87F80208066D500491ABD /* WaiterTableViewCell.swift in Sources */,
 				651CBBDA1AB4E4A000F265E8 /* Restaurant.m in Sources */,
 				651CBBAF1AB4E1CC00F265E8 /* main.m in Sources */,
 			);

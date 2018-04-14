@@ -36,20 +36,40 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     // Dispose of any resources that can be recreated.
 }
 #pragma mark - TableView Data Source
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.waiters.count;
-}
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
-    Waiter *waiter = self.waiters[indexPath.row];
-    cell.textLabel.text = waiter.name;
-    return cell;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//    return 1;
+//}
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    return self.waiters.count;
+//}
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
+//    Waiter *waiter = self.waiters[indexPath.row];
+//    cell.textLabel.text = waiter.name;
+//    return cell;
+//}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"showWaiter" sender:self];
 }
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        // Delete the row from the data source
+////        delete(name: "ddd");
+//        
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//    }
+//}
 
+//-(void)deleteAllObjects: (NSString *)name{
+//    NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"Waiter"];
+//    NSError *error;
+//    NSArray *items =[self.managedObjectContext executeFetchRequest:request error:&error];
+//    
+//    for (NSManagedObject *managedObject in items) {
+//        [self.managedObjectContext deleteObject:managedObject];
+//    }
+//    if(![self.managedObjectContext save:&error]){
+//        NSLog(@"Error deleting: %@ - error: %@",entityName,error);
+//    }
+//}
 @end
