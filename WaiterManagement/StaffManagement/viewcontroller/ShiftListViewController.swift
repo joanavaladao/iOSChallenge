@@ -10,24 +10,49 @@ import UIKit
 
 protocol ShiftListDelegate {
     func setDelegate(_ delegate: ShiftDataDelegate)
+    func reload()
     func show()
     func update()
     func delete()
 }
 
-class ShiftListViewController: UIViewController {
-
+class ShiftListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     var delegate: ShiftDataDelegate?
+    
+    @IBOutlet weak var tableview: UITableView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tableview.delegate = self
+        tableview.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let delegate = delegate {
+            return delegate.quantityOfShifts()
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "shiftCell", for:indexPath) as? ShiftTableViewCell,
+            let delegate = delegate {
+            let index = indexPath.row
+            let shift = delegate.shiftAt(index)
+            cell.startShiftLabel.text = shift?.start.description(with: .current)
+            cell.endShiftLabel.text = shift?.end.description(with: .current)
+            return cell
+        }
+        
+        return UITableViewCell()
     }
     
 
@@ -48,6 +73,10 @@ extension ShiftListViewController: ShiftListDelegate {
     
     func setDelegate(_ delegate: ShiftDataDelegate) {
         self.delegate = delegate
+    }
+    
+    func reload() {
+        tableview.reloadData()
     }
     
     func show() {

@@ -12,6 +12,8 @@ protocol ShiftDataDelegate {
     func showShiftList()
     func showShiftDetail()
     func addShift(start: Date, end: Date)
+    func quantityOfShifts() -> Int
+    func shiftAt(_ index: Int) -> Shift?
     func deleteShift()
 }
 
@@ -96,7 +98,19 @@ class WaiterViewController: UIViewController {
     }
 }
 
-extension WaiterViewController: ShiftDataDelegate {  
+extension WaiterViewController: ShiftDataDelegate {
+    func shiftAt(_ index: Int) -> Shift? {
+        print("shifts: \(shifts.count), index: \(index)")
+        if shifts.count > 0 && index < shifts.count {
+            return shifts[index]
+        }
+        return nil
+    }
+    
+    func quantityOfShifts() -> Int {
+        return shifts.count
+    }
+    
     func showShiftList() {
         shiftDetailContainer.isHidden = true
         shiftListContainer.isHidden = false
@@ -110,6 +124,9 @@ extension WaiterViewController: ShiftDataDelegate {
     func addShift(start: Date, end: Date) {
         if validaShift(start: start, end: end) {
             shifts.append(Shift(start: start, end: end))
+            if let shiftList = shiftList {
+                shiftList.reload()
+            }
             showShiftList()
             print("***** SHIFTS: \(shifts)")
         } else {
