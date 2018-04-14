@@ -10,7 +10,7 @@ import Foundation
 
 protocol WaiterDelegate {
     func addWaiter(_ name: String)
-    func deleteWaiter(_ name: String, index: Int)
+    func deleteWaiter(_ name: String)
     func getName() -> String
 }
 
@@ -34,28 +34,21 @@ extension ViewController: WaiterDelegate {
         }
 
         let managedContext: NSManagedObjectContext = appDelegate.managedObjectContext
-//        let entity = NSEntityDescription.entity(forEntityName: "Waiter", in: managedContext)
-//        let newWaiter = NSManagedObject(entity: entity!, insertInto: managedContext)
-//        newWaiter.setValue(name, forKey: "name")
         if #available(iOS 10.0, *) {
             let newWaiter = Waiter(context: managedContext)
             newWaiter.name = name
-//            waiters.append(newWaiter)
-//            newWaiter.
             restaurant.addStaffObject(newWaiter)
             waiters.append(newWaiter)
             tableView.reloadData()
         } else {
             // Fallback on earlier versions
         }
-        
 
         do {
             try managedContext.save()
         } catch {
             print("Failed to save")
         }
-
     }
     
     @objc func deleteWaiter(_ name: String) {

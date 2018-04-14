@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "StaffManagement/viewcontroller/Protocols.swift"
-            timestampString = "545365875.220735"
+            timestampString = "545366533.550107"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "StaffManagement/viewcontroller/Protocols.swift"
-            timestampString = "545365875.221318"
+            timestampString = "545366533.550642"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "addWaiter(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,7 +74,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "StaffManagement/viewcontroller/Protocols.swift"
-            timestampString = "545365875.221518"
+            timestampString = "545366533.550837"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "ViewController"
+            landmarkType = "21">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "StaffManagement/viewcontroller/Protocols.swift"
+            timestampString = "545366533.551033"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "105"
@@ -90,28 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "StaffManagement/viewcontroller/Protocols.swift"
-            timestampString = "545365875.221764"
+            timestampString = "545366533.5512249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "ViewController"
-            landmarkType = "21">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "StaffManagement/viewcontroller/Protocols.swift"
-            timestampString = "545365875.221977"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "deleteWaiter(_:index:)"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "deleteWaiter(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,12 +122,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "StaffManagement/viewcontroller/Protocols.swift"
-            timestampString = "545365875.222196"
+            timestampString = "545366533.551415"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "deleteWaiter(_:index:)"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "deleteWaiter(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
