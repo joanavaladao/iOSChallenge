@@ -10,113 +10,66 @@ import UIKit
 
 protocol ShiftDetailDelegate {
     func setDelegate(_ delegate: ShiftDataDelegate)
-    func show()
-    func update()
-    func delete()
 }
 
 class ShiftDetailViewController: UIViewController, UITextFieldDelegate {
 
     var delegate: ShiftDataDelegate?
     
-    @IBOutlet weak var startShiftTextField: UITextField!
-    @IBOutlet weak var endShiftTextField: UITextField!
+    @IBOutlet weak var tableview: UITableView!
     
     var id: Int?
     var startDate: Date?
     var endDate: Date?
+    var visiblePicker: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        startShiftTextField.delegate = self
-        endShiftTextField.delegate = self
-    }
-
-    private func createDatePicker(_ sender: UITextField, hasToolbar: Bool = true) {
-        // Toolbar
-//        if hasToolbar {
-//            let toolBar = UIToolbar()
-//            toolBar.barStyle = .default
-//            toolBar.isTranslucent = true
-//            toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
-//            toolBar.sizeToFit()
-//
-//            let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneClick(sender:)))
-//            let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//            toolBar.setItems([spaceButton, doneButton], animated: true)
-//            toolBar.isUserInteractionEnabled = true
-//            sender.inputAccessoryView = toolBar
-//        }
-        
-        // DatePicker
-        let datePickerView  : UIDatePicker = UIDatePicker()
-        datePickerView.datePickerMode = UIDatePickerMode.dateAndTime
-        datePickerView.minuteInterval = 30
-        datePickerView.backgroundColor = .white
-        datePickerView.locale = .current
-        sender.inputView = datePickerView
-        switch sender {
-        case startShiftTextField:
-            datePickerView.addTarget(self, action: #selector(handleStartDate(sender:)), for: UIControlEvents.valueChanged)
-        case endShiftTextField:
-            datePickerView.addTarget(self, action: #selector(handleEndDate(sender:)), for: UIControlEvents.valueChanged)
-        default:
-            print("error")
-        }            
+        tableview.delegate = self
+        tableview.dataSource = self
     }
     
     @objc func handleStartDate(sender: UIDatePicker) {
-        startDate = truncateSecond(date: handleDatePicker(sender: sender, textField: startShiftTextField))
+        print("start: \(sender.tag)")
+        if sender.tag == 1 {
+            let date = handleDatePicker(sender: sender)
+            startDate = date.truncateSecond()
+            tableview.reloadData()
+        }
     }
 
     @objc func handleEndDate(sender: UIDatePicker) {
-        endDate = truncateSecond(date: handleDatePicker(sender: sender, textField: endShiftTextField))
+        print("end: \(sender.tag)")
+        if sender.tag == 3 {
+            let date = handleDatePicker(sender: sender)
+            endDate = date.truncateSecond()
+            tableview.reloadData()
+        }
     }
-    
-    @objc func doneClick(sender: UIDatePicker) {
-        print(handleDatePicker(sender: sender, textField: startShiftTextField))
-    }
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        createDatePicker(textField)
-        return true
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     // MARK: Action
-    @IBAction func saveShift(_ sender: UIButton) {
+    func addShift(sender: UIButton) {
         if validateShift(),
             let startDate = startDate,
             let endDate = endDate {
             delegate?.addShift(id: id, start: startDate, end: endDate)
         }
     }
-    
-    @IBAction func cancel(_ sender: UIButton) {
+
+    func cancelShift(sender: UIButton) {
         if let delegate = self.delegate {
             delegate.showShiftList()
         }
     }
-    
+
     // MARK: Private functions
-    private func handleDatePicker(sender: UIDatePicker, textField: UITextField) -> Date{
+    private func handleDatePicker(sender: UIDatePicker) -> Date{
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short
-        textField.text = dateFormatter.string(from: sender.date)
         return sender.date
     }
-    
+
     private func validateShift() -> Bool{
         if let startDate = startDate,
             let endDate = endDate,
@@ -127,31 +80,99 @@ class ShiftDetailViewController: UIViewController, UITextFieldDelegate {
         }
         return false
     }
-    
-    private func truncateSecond(date: Date) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        let dateString = dateFormatter.string(from: date)
-        
-        return dateFormatter.date(from: dateString)!
-    }
 }
 
 extension ShiftDetailViewController: ShiftDetailDelegate {
     func setDelegate(_ delegate: ShiftDataDelegate) {
         self.delegate = delegate
     }
-    
-    func show() {
-        
+}
+
+extension ShiftDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 4
+        }
+        return 1
     }
     
-    func update() {
-        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let index = indexPath.row
+            if index%2 == 0 {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "dateCell", for:indexPath) as? DateTableViewCell {
+                    if index == 0 {
+                        cell.lineLabel.text = "Starts"
+                        cell.dateLabel.text = startDate?.formatDate()
+                    } else if index == 2 {
+                        cell.lineLabel.text = "Ends"
+                        cell.dateLabel.text = endDate?.formatDate()
+                    }
+                    return cell
+                }
+                return DateTableViewCell()
+            } else {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "pickerCell", for: indexPath) as? PickerDateTableViewCell {
+                    cell.pickerDate.tag = indexPath.row
+                    cell.pickerDate.datePickerMode = .dateAndTime
+                    cell.pickerDate.backgroundColor = .white
+                    cell.pickerDate.locale = .current
+                    if index == 1 {
+                        cell.pickerDate.addTarget(self, action: #selector(handleStartDate(sender:)), for: UIControlEvents.valueChanged)
+                    } else {
+                        cell.pickerDate.addTarget(self, action: #selector(handleEndDate(sender:)), for: UIControlEvents.valueChanged)
+                    }
+                    return cell
+                }
+            }
+        } else {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "buttonsCell", for: indexPath) as? TwoButtonsTableViewCell {
+                cell.addButton.tag = indexPath.row
+                cell.cancelButton.tag = indexPath.row
+                cell.addButton.addTarget(self, action: #selector(addShift(sender:)), for: .touchUpInside)
+                cell.cancelButton.addTarget(self, action: #selector(cancelShift(sender:)), for: .touchUpInside)
+                return cell
+            }
+        }
+        return UITableViewCell()
     }
     
-    func delete() {
-        
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let index = indexPath.row
+        if  index == 0 || index == 2 {
+            return 44
+        } else if index == visiblePicker {
+            return 164
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let index = indexPath.row
+        if index == 0 {
+            visiblePicker = visiblePicker == 1 ? 0 : 1
+        } else if index == 2 {
+            visiblePicker = visiblePicker == 3 ? 0 : 3
+        }
+        tableview.reloadSections(IndexSet(integer: 0), with: UITableViewRowAnimation.automatic)
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Choose the shift"
+        }
+        return ""
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = UIColor(red: 214.0/255.0, green: 214.0/255.0, blue: 214.0/255.0, alpha: 1.0)
+        if let header = view as? UITableViewHeaderFooterView {
+            header.textLabel?.font = UIFont(descriptor: UIFontDescriptor(name: "System", size: 14.0), size: 14.0)
+        }
     }
 }
 

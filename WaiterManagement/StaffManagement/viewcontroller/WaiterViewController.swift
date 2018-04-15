@@ -44,6 +44,7 @@ class WaiterViewController: UIViewController {
     var shiftDetail: ShiftDetailDelegate?
     var shifts: [ShiftStructure] = []
     var isNewWaiter: Bool = true
+    var navigationSaveButton: UIBarButtonItem?
     
     @IBOutlet weak var waiterName: UITextField!
     @IBOutlet weak var shiftListContainer: UIView!
@@ -51,7 +52,8 @@ class WaiterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButton))
+        navigationSaveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButton))
+        navigationItem.rightBarButtonItem = navigationSaveButton
         if isNewWaiter {
             cleanScreen()
             self.navigationItem.title = "Add Waiter"
@@ -152,11 +154,13 @@ extension WaiterViewController: ShiftDataDelegate {
     func showShiftList() {
         shiftDetailContainer.isHidden = true
         shiftListContainer.isHidden = false
+        navigationSaveButton?.isEnabled = true
     }
     
     func showShiftDetail() {
         shiftListContainer.isHidden = true
         shiftDetailContainer.isHidden = false
+        navigationSaveButton?.isEnabled = false
     }
     
     func addShift(id: Int?, start: Date, end: Date) {

@@ -11,9 +11,6 @@ import UIKit
 protocol ShiftListDelegate {
     func setDelegate(_ delegate: ShiftDataDelegate)
     func reload()
-    func show()
-    func update()
-    func delete()
 }
 
 class ShiftListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -55,8 +52,8 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
                 let shift = delegate.shiftAt(index)
                 if let start = shift?.start,
                     let end = shift?.end {
-                    cell.startShiftLabel.text = formatDate(date: start)
-                    cell.endShiftLabel.text = formatDate(date: end)
+                    cell.startShiftLabel.text = start.formatDate()
+                    cell.endShiftLabel.text = end.formatDate()
                 }
                 return cell
             }
@@ -107,30 +104,26 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
             header.textLabel?.font = UIFont(descriptor: UIFontDescriptor(name: "System", size: 14.0), size: 14.0)
         }
     }
-    
-//    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-//        <#code#>
-//    }
-    
-    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension ShiftListViewController: ShiftListDelegate {
+    
+    func setDelegate(_ delegate: ShiftDataDelegate) {
+        self.delegate = delegate
     }
-    */
     
-    
-    private func formatDate(date: Date) -> String {
+    func reload() {
+        tableview.reloadData()
+    }
+}
+
+extension Date {
+    func formatDate() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM, dd HH:mm"
-        var dateString = dateFormatter.string(from:date)
+        dateFormatter.dateFormat = "MMM dd, yyyy HH:mm a"
+        let dateString = dateFormatter.string(from: self)
         
-        let weekday = Calendar.current.component(.weekday, from: date)
+        let weekday = Calendar.current.component(.weekday, from: self)
         var weekdayString: String
         switch weekday {
         case 1:
@@ -150,31 +143,14 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
         default:
             weekdayString = ""
         }
-        return "\(weekdayString), \(dateString)"
-    }
-
-}
-
-//TODO: implement functions
-extension ShiftListViewController: ShiftListDelegate {
-    
-    func setDelegate(_ delegate: ShiftDataDelegate) {
-        self.delegate = delegate
+        return "\(weekdayString) \(dateString)"
     }
     
-    func reload() {
-        tableview.reloadData()
-    }
-    
-    func show() {
-        print("read")
-    }
-    
-    func update() {
-        print("update")
-    }
-    
-    func delete() {
-        print("delete")
+    func truncateSecond() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let dateString = dateFormatter.string(from: self)
+        
+        return dateFormatter.date(from: dateString)!
     }
 }
