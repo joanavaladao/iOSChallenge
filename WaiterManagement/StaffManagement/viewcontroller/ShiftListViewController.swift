@@ -55,12 +55,13 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
         return UITableViewCell()
     }
     
-//    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        let waiter = waiters[indexPath.row] as! Waiter
-//        deleteWaiter(waiter.name)
-//        waiters.remove(at: indexPath.row)
-//        tableView.reloadData()
-//    }
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if let delegate = delegate,
+            let shift = delegate.shiftAt(indexPath.row) {
+            delegate.deleteShift(shift, index: indexPath.row)
+            tableView.reloadData()
+        }
+    }
     
 
     /*

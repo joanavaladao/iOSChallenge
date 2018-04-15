@@ -8,7 +8,7 @@
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="waiter" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Waiter" inverseName="shifts" inverseEntity="Waiter" syncable="YES"/>
+        <relationship name="waiter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Waiter" inverseName="shifts" inverseEntity="Waiter" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
@@ -18,7 +18,7 @@
     <entity name="Waiter" representedClassName="Waiter" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="restaurant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Restaurant" inverseName="staff" inverseEntity="Restaurant" syncable="YES"/>
-        <relationship name="shifts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Shift" inverseName="waiter" inverseEntity="Shift" syncable="YES"/>
+        <relationship name="shifts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Shift" inverseName="waiter" inverseEntity="Shift" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="name"/>
@@ -28,6 +28,6 @@
     <elements>
         <element name="Restaurant" positionX="-495" positionY="-190" width="128" height="73"/>
         <element name="Shift" positionX="9" positionY="-177" width="128" height="103"/>
-        <element name="Waiter" positionX="-225" positionY="-144" width="128" height="90"/>
+        <element name="Waiter" positionX="-225" positionY="-144" width="128" height="88"/>
     </elements>
 </model>

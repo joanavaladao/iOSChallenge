@@ -14,7 +14,7 @@ protocol ShiftDataDelegate {
     func addShift(id: Int?, start: Date, end: Date)
     func quantityOfShifts() -> Int
     func shiftAt(_ index: Int) -> ShiftStructure?
-    func deleteShift()
+    func deleteShift(_ shift: ShiftStructure, index: Int)
 }
 
 struct ShiftStructure {
@@ -159,7 +159,30 @@ extension WaiterViewController: ShiftDataDelegate {
         }
     }
     
-    func deleteShift() {
+    func deleteShift(_ shift: ShiftStructure, index: Int) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
         
+        let managedContext: NSManagedObjectContext = appDelegate.managedObjectContext
+        if #available(iOS 10.0, *) {
+            if let fetchRequest: NSFetchRequest<Shift> = Shift.fetchRequest() as? NSFetchRequest<Shift>,
+                let id = shift.id {
+                fetchRequest.predicate = NSPredicate.init(format: "id==\(id)")
+                if let result = try? managedContext.fetch(fetchRequest) {
+                    for object in result {
+                        managedContext.delete(object)
+                    }
+                    do {
+                        try managedContext.save()
+                        shifts.remove(at: index)
+                    } catch {
+                        print ("There was an error")
+                    }
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
