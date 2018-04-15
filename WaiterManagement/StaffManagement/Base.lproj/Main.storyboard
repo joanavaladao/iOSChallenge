@@ -59,7 +59,18 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zhi-lo-tSx">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="Item" id="MgV-Zy-Ufg"/>
+                                    <barButtonItem systemItem="flexibleSpace" id="qgk-8V-gzX"/>
+                                    <barButtonItem title="Home" image="home-selected" landscapeImage="home-selected" id="MgV-Zy-Ufg">
+                                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="3" maxY="0.0"/>
+                                        <inset key="largeContentSizeImageInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="6vF-wC-bcR"/>
+                                    <barButtonItem title="Report" image="report" landscapeImage="report" id="NoA-Up-OVy">
+                                        <connections>
+                                            <segue destination="huU-l5-JDy" kind="show" identifier="showReport" id="Tgh-0c-Tii"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="x8i-2z-sP1"/>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -88,6 +99,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="972" y="30.134932533733135"/>
+        </scene>
+        <!--Report View Controller-->
+        <scene sceneID="cTm-eX-hxR">
+            <objects>
+                <viewController id="huU-l5-JDy" customClass="ReportViewController" customModule="StaffManagement" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GKH-DV-a4e"/>
+                        <viewControllerLayoutGuide type="bottom" id="Sia-Dq-WMR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="O6o-Tt-Pr6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWs-6S-1ps">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="flexibleSpace" id="ZVM-iK-RHs"/>
+                                    <barButtonItem title="Home" image="home" landscapeImage="home" id="SiO-G4-fJl">
+                                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="3" maxY="0.0"/>
+                                        <inset key="largeContentSizeImageInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <action selector="homeButton:" destination="huU-l5-JDy" id="rUD-UZ-cab"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="B2h-ks-uM3"/>
+                                    <barButtonItem title="Report" image="report-selected" landscapeImage="report-selected" id="6yr-c7-DaG"/>
+                                    <barButtonItem systemItem="flexibleSpace" id="oiX-2F-Oc5"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kWs-6S-1ps" secondAttribute="trailing" id="XPi-vy-YNJ"/>
+                            <constraint firstItem="Sia-Dq-WMR" firstAttribute="top" secondItem="kWs-6S-1ps" secondAttribute="bottom" id="hOQ-fd-Byg"/>
+                            <constraint firstItem="kWs-6S-1ps" firstAttribute="leading" secondItem="O6o-Tt-Pr6" secondAttribute="leading" id="mFf-TB-Rfo"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JZV-M9-KMb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1380" y="818"/>
         </scene>
         <!--Waiter View Controller-->
         <scene sceneID="pxi-qA-7QB">
@@ -127,7 +179,18 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tLj-HJ-BKA">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="Item" id="0Pm-HJ-oSH"/>
+                                    <barButtonItem systemItem="flexibleSpace" id="IYz-uo-LIa"/>
+                                    <barButtonItem title="Home" image="home-selected" landscapeImage="home-selected" id="YVg-ss-tQx">
+                                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="3" maxY="0.0"/>
+                                        <inset key="largeContentSizeImageInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="5GZ-oo-YFB"/>
+                                    <barButtonItem title="Report" image="report" landscapeImage="report" id="ZD6-fp-IKI">
+                                        <connections>
+                                            <segue destination="huU-l5-JDy" kind="show" identifier="showReport" id="JUt-Cc-R8H"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="LX8-Pe-VzK"/>
                                 </items>
                             </toolbar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z8v-fC-NeA" userLabel="Shift Picker">
@@ -282,7 +345,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khX-dL-HjY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1775" y="730"/>
+            <point key="canvasLocation" x="3014" y="546"/>
         </scene>
         <!--Shift Detail View Controller-->
         <scene sceneID="B3W-vz-Vfb">
@@ -420,10 +483,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NCt-Tn-sPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2664.8000000000002" y="150.67466266866569"/>
+            <point key="canvasLocation" x="3014" y="-108"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="home" width="25" height="25"/>
+        <image name="home-selected" width="25" height="25"/>
+        <image name="report" width="25" height="25"/>
+        <image name="report-selected" width="25" height="25"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="f0W-0S-nXn"/>
+        <segue reference="JUt-Cc-R8H"/>
     </inferredMetricsTieBreakers>
 </document>

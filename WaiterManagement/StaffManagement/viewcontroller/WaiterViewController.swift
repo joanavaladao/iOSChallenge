@@ -106,6 +106,9 @@ class WaiterViewController: UIViewController {
         } else if let viewController = segue.destination as? ShiftDetailDelegate {
             self.shiftDetail = viewController
             self.shiftDetail?.setDelegate(self)
+        } else if let view = segue.destination as? ReportViewController,
+            let delegate = delegate{
+            view.delegate = delegate
         }
     }
     

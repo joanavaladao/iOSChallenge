@@ -13,6 +13,7 @@ protocol WaiterDelegate {
     func deleteWaiter(_ name: String)
     func getName() -> String
     func getShifts() -> [ShiftStructure]
+    func showReport() -> (Int, [Waiter])
 }
 
 
@@ -25,6 +26,8 @@ extension ViewController {
             } else {
                 view.isNewWaiter(true)
             }
+        } else if let view = segue.destination as? ReportViewController {
+            view.delegate = self
         }
     }
     
@@ -120,6 +123,19 @@ extension ViewController: WaiterDelegate {
             }
         }
         return result
+    }
+    
+    func showReport() -> (Int, [Waiter]) {
+        var result: [Waiter] = []
+        var errors: Int = 0
+        for waiter in waiters {
+            if let waiter = waiter as? Waiter {
+                result.append(waiter)
+            } else {
+                errors += 1
+            }
+        }
+        return (errors, result)
     }
 }
 
