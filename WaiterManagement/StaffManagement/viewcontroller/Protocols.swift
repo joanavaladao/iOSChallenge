@@ -65,7 +65,18 @@ extension ViewController: WaiterDelegate {
             }
             
             restaurant.addStaffObject(newWaiter)
-            waiters.append(newWaiter)
+            
+            var new = true
+            for waiter in waiters {
+                if (waiter as! Waiter).name == newWaiter.name {
+                    new = false
+                    break
+                }
+            }
+            if new {
+                 waiters.append(newWaiter)
+            }
+           
             tableView.reloadData()
         } else {
             // Fallback on earlier versions

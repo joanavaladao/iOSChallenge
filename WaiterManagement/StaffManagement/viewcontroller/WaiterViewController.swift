@@ -45,6 +45,7 @@ class WaiterViewController: UIViewController {
     var shifts: [ShiftStructure] = []
     var isNewWaiter: Bool = true
     var navigationSaveButton: UIBarButtonItem?
+    var maxID: Int = 0
     
     @IBOutlet weak var waiterName: UITextField!
     @IBOutlet weak var shiftListContainer: UIView!
@@ -61,6 +62,7 @@ class WaiterViewController: UIViewController {
             showData()
             self.navigationItem.title = ""
         }
+        maxID = findMaxID()
     }
 
     override func didReceiveMemoryWarning() {
@@ -133,11 +135,30 @@ class WaiterViewController: UIViewController {
         return true
     }
     
-    func maxID() -> Int{
-        let max = shifts.max(by: {(a, b) -> Bool in
-            return a.id ?? 0 < b.id ?? 0
-        })
-        return max?.id ?? 0
+    func findMaxID() -> Int{
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return -1
+        }
+        
+        var max = 0
+        
+        let managedContext: NSManagedObjectContext = appDelegate.managedObjectContext
+        if #available(iOS 10.0, *) {
+            let fetchRequest: NSFetchRequest<Shift> = Shift.fetchRequest() as! NSFetchRequest<Shift>
+            if let result = try? managedContext.fetch(fetchRequest) {
+                for object in result {
+                    if let id = object.id as? Int,
+                        max < id {
+                        max = id
+                    }
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        return max
     }
 }
 
@@ -168,8 +189,8 @@ extension WaiterViewController: ShiftDataDelegate {
     
     func addShift(id: Int?, start: Date, end: Date) {
         if validaShift(start: start, end: end) {
-            let id = maxID()
-            shifts.append(ShiftStructure(id: id+1, startDate: start, endDate: end))
+            maxID += 1
+            shifts.append(ShiftStructure(id: maxID, startDate: start, endDate: end))
             if let shiftList = shiftList {
                 shiftList.reload()
             }

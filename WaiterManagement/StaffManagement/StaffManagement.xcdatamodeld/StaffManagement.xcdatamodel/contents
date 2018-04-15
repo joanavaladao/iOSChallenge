@@ -18,7 +18,7 @@
     <entity name="Waiter" representedClassName="Waiter" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="restaurant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Restaurant" inverseName="staff" inverseEntity="Restaurant" syncable="YES"/>
-        <relationship name="shifts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Shift" inverseName="waiter" inverseEntity="Shift" syncable="YES"/>
+        <relationship name="shifts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Shift" inverseName="waiter" inverseEntity="Shift" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="name"/>

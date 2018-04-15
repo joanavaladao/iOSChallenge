@@ -60,6 +60,7 @@ class ReportViewController: UIViewController {
         tableview.delegate = self
         tableview.dataSource = self
 
+        self.navigationItem.title = "Shifts Map"
         // Do any additional setup after loading the view.
     }
     
