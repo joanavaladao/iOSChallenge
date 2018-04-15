@@ -167,10 +167,12 @@ extension WaiterViewController: ShiftDataDelegate {
                 shiftList.reload()
             }
             showShiftList()
-            print("***** SHIFTS: \(shifts)")
         } else {
-            //TODO: show alert
-            print("shift invalido")
+            let alert = UIAlertController(title: "Invalid Shift",
+                                          message: "There are invalid shifts on your list. Please be sure that end date is bigger than the start date, and that there is no intersection with other shifts registered.",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true)
         }
     }
     

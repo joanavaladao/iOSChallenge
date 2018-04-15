@@ -36,7 +36,8 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 {
+        print(section)
+        if section == 0 {
             if let delegate = delegate {
                 return delegate.quantityOfShifts()
             }
@@ -47,7 +48,7 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 1 {
+        if indexPath.section == 0 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "shiftCell", for:indexPath) as? ShiftTableViewCell,
                 let delegate = delegate {
                 let index = indexPath.row
@@ -61,12 +62,20 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
             }
             return ShiftTableViewCell()
         } else {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "buttonCell", for: indexPath) as? ButtonTableViewCell,
-                let delegate = delegate {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "buttonCell", for: indexPath) as? ButtonTableViewCell {
+                cell.buttonCell.tag = indexPath.row
+                cell.buttonCell.addTarget(self, action: #selector(addShiftButton(sender:)), for: .touchUpInside)
                 return cell
             }
         }
         return UITableViewCell()
+    }
+    
+    @objc func addShiftButton(sender: UIButton) {
+        print("activate button")
+        if let delegate = delegate {
+            delegate.showShiftDetail()
+        }
     }
     
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -82,15 +91,27 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
+        if section == 0 {
             return "Shifts"
         }
         return ""
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = UIColor(red: 214.0/255.0, green: 214.0/255.0, blue: 214.0/255.0, alpha: 1.0)
+        if let header = view as? UITableViewHeaderFooterView {
+            header.textLabel?.font = UIFont(descriptor: UIFontDescriptor(name: "System", size: 14.0), size: 14.0)
+        }
+    }
+    
+//    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+//        <#code#>
+//    }
+    
     
 
     /*

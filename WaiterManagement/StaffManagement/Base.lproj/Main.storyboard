@@ -102,7 +102,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qLh-fJ-dfm">
-                                <rect key="frame" x="8" y="80" width="359" height="30"/>
+                                <rect key="frame" x="16" y="80" width="343" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFz-kg-CKa">
                                         <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
@@ -111,9 +111,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ynS-PP-bgn">
-                                        <rect key="frame" x="61" y="0.0" width="298" height="30"/>
+                                        <rect key="frame" x="61" y="0.0" width="282" height="30"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
@@ -147,10 +147,10 @@
                             <constraint firstItem="qLh-fJ-dfm" firstAttribute="top" secondItem="03C-oo-m6B" secondAttribute="bottom" constant="16" id="Pyh-Kk-3Il"/>
                             <constraint firstItem="Z8v-fC-NeA" firstAttribute="top" secondItem="d3x-tU-as3" secondAttribute="top" id="R7F-rl-703"/>
                             <constraint firstItem="d3x-tU-as3" firstAttribute="bottom" secondItem="tLj-HJ-BKA" secondAttribute="top" id="SA9-dA-9Ca"/>
-                            <constraint firstItem="qLh-fJ-dfm" firstAttribute="leading" secondItem="ZgF-2F-ank" secondAttribute="leading" constant="8" id="bHF-rG-0LQ"/>
+                            <constraint firstItem="qLh-fJ-dfm" firstAttribute="leading" secondItem="ZgF-2F-ank" secondAttribute="leading" constant="16" id="bHF-rG-0LQ"/>
                             <constraint firstItem="Z8v-fC-NeA" firstAttribute="bottom" secondItem="d3x-tU-as3" secondAttribute="bottom" id="feo-v2-sGi"/>
                             <constraint firstItem="tLj-HJ-BKA" firstAttribute="leading" secondItem="ZgF-2F-ank" secondAttribute="leading" id="giI-Dd-iPb"/>
-                            <constraint firstAttribute="trailing" secondItem="qLh-fJ-dfm" secondAttribute="trailing" constant="8" id="h5s-gB-JGi"/>
+                            <constraint firstAttribute="trailing" secondItem="qLh-fJ-dfm" secondAttribute="trailing" constant="16" id="h5s-gB-JGi"/>
                             <constraint firstItem="tLj-HJ-BKA" firstAttribute="bottom" secondItem="deQ-PX-Bwa" secondAttribute="top" id="jMI-kN-GNG"/>
                             <constraint firstItem="d3x-tU-as3" firstAttribute="top" secondItem="qLh-fJ-dfm" secondAttribute="bottom" constant="16" id="xC4-K5-Pbk"/>
                         </constraints>
