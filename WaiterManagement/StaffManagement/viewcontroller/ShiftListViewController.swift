@@ -36,28 +36,38 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let delegate = delegate {
-            return delegate.quantityOfShifts()
+        if section == 1 {
+            if let delegate = delegate {
+                return delegate.quantityOfShifts()
+            }
+        } else {
+            return 1
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "shiftCell", for:indexPath) as? ShiftTableViewCell,
-            let delegate = delegate {
-            let index = indexPath.row
-            let shift = delegate.shiftAt(index)
-            if let start = shift?.start,
-                let end = shift?.end {
-                cell.startShiftLabel.text = formatDate(date: start)
-                cell.endShiftLabel.text = formatDate(date: end)
+        if indexPath.section == 1 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "shiftCell", for:indexPath) as? ShiftTableViewCell,
+                let delegate = delegate {
+                let index = indexPath.row
+                let shift = delegate.shiftAt(index)
+                if let start = shift?.start,
+                    let end = shift?.end {
+                    cell.startShiftLabel.text = formatDate(date: start)
+                    cell.endShiftLabel.text = formatDate(date: end)
+                }
+                return cell
             }
-            return cell
+            return ShiftTableViewCell()
+        } else {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "buttonCell", for: indexPath) as? ButtonTableViewCell,
+                let delegate = delegate {
+                return cell
+            }
         }
         return UITableViewCell()
     }
-    
-    
     
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if let delegate = delegate,
@@ -69,6 +79,17 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "Shifts"
+        }
+        return ""
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
     }
     
 

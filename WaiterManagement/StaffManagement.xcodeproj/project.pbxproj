@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5B5D61E82082AB0E001CA81B /* Shift.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D61E72082AB0E001CA81B /* Shift.m */; };
+		5B5D61EA208322E1001CA81B /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D61E9208322E1001CA81B /* ButtonTableViewCell.swift */; };
 		5B7D8F56208235CA00231072 /* ShiftListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7D8F55208235CA00231072 /* ShiftListViewController.swift */; };
 		5B7D8F58208235F200231072 /* ShiftDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7D8F57208235F200231072 /* ShiftDetailViewController.swift */; };
 		5B9CFB002082828C00A00E86 /* ShiftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9CFAFF2082828C00A00E86 /* ShiftTableViewCell.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		5B5D61E62082AAFC001CA81B /* Shift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shift.h; sourceTree = "<group>"; };
 		5B5D61E72082AB0E001CA81B /* Shift.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Shift.m; sourceTree = "<group>"; };
+		5B5D61E9208322E1001CA81B /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		5B7D8F55208235CA00231072 /* ShiftListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftListViewController.swift; sourceTree = "<group>"; };
 		5B7D8F57208235F200231072 /* ShiftDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftDetailViewController.swift; sourceTree = "<group>"; };
 		5B9CFAFF2082828C00A00E86 /* ShiftTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftTableViewCell.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				5B7D8F55208235CA00231072 /* ShiftListViewController.swift */,
 				5B7D8F57208235F200231072 /* ShiftDetailViewController.swift */,
 				5B9CFAFF2082828C00A00E86 /* ShiftTableViewCell.swift */,
+				5B5D61E9208322E1001CA81B /* ButtonTableViewCell.swift */,
 			);
 			path = viewcontroller;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				5BB87F80208066D500491ABD /* WaiterTableViewCell.swift in Sources */,
 				651CBBDA1AB4E4A000F265E8 /* Restaurant.m in Sources */,
 				5B7D8F58208235F200231072 /* ShiftDetailViewController.swift in Sources */,
+				5B5D61EA208322E1001CA81B /* ButtonTableViewCell.swift in Sources */,
 				5B5D61E82082AB0E001CA81B /* Shift.m in Sources */,
 				651CBBAF1AB4E1CC00F265E8 /* main.m in Sources */,
 			);
