@@ -22,6 +22,19 @@ extension ViewController {
             view.delegate = self
         }
     }
+    
+    override open func viewWillAppear(_ animated: Bool) {
+        if let navigationBar = self.navigationController?.navigationBar {
+            navigationBar.barTintColor = UIColor(red: 70.0/255.0, green: 70.0/255.0, blue: 70.0/255.0, alpha: 1.0)
+            navigationBar.barStyle = UIBarStyle.black
+            navigationBar.tintColor = UIColor.white
+            navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+            self.navigationItem.title = "Waiters"
+        }
+        
+        
+        
+    }
  
 }
 
