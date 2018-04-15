@@ -12,6 +12,7 @@ protocol WaiterDelegate {
     func addWaiter(_ name: String, shifts: [ShiftStructure])
     func deleteWaiter(_ name: String)
     func getName() -> String
+    func getShifts() -> [ShiftStructure]
 }
 
 
@@ -36,8 +37,13 @@ extension ViewController: WaiterDelegate {
         if #available(iOS 10.0, *) {
             let newWaiter = Waiter(context: managedContext)
             newWaiter.name = name
+            
             for shift in shifts {
-//                let newShift = Shift(
+                let newShift = Shift(context: managedContext)
+                newShift.id = shift.id! as NSNumber
+                newShift.startTime = shift.start
+                newShift.endTime = shift.end
+                newWaiter.addShiftsObject(newShift)
             }
             
             restaurant.addStaffObject(newWaiter)
@@ -87,7 +93,19 @@ extension ViewController: WaiterDelegate {
         return ""
     }
     
-    
+    func getShifts() -> [ShiftStructure] {
+        var result: [ShiftStructure] = []
+        if let index = self.tableView.indexPathForSelectedRow?.row {
+            let waiter = waiters[index] as! Waiter
+            
+            for shift in waiter.shifts {
+                if let shift = shift as? Shift {
+                    result.append(ShiftStructure(id: shift.id as! Int, startDate: shift.startTime, endDate: shift.endTime))
+                }
+            }
+        }
+        return result
+    }
 }
 
 extension ViewController: UITableViewDataSource {

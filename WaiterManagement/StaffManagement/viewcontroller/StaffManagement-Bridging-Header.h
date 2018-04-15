@@ -5,3 +5,4 @@
 #import "ViewController.m"
 #import "../RestaurantManager.h"
 #import "../RestaurantManager.m"
+#import "Shift.h"

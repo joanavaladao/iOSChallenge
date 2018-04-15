@@ -10,6 +10,7 @@
 #import "Restaurant.h"
 #import "RestaurantManager.h"
 #import "Waiter.h"
+//#import "Shift.h"
 
 static NSString * const kCellIdentifier = @"CellIdentifier";
 
@@ -26,7 +27,6 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
     NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
     self.restaurant = [[RestaurantManager sharedManager]currentRestaurant];
-//    self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
     self.waiters = [self.restaurant.staff sortedArrayUsingDescriptors:@[sortByName]];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -36,40 +36,5 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     // Dispose of any resources that can be recreated.
 }
 #pragma mark - TableView Data Source
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return 1;
-//}
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return self.waiters.count;
-//}
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
-//    Waiter *waiter = self.waiters[indexPath.row];
-//    cell.textLabel.text = waiter.name;
-//    return cell;
-//}
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [self performSegueWithIdentifier:@"showWaiter" sender:self];
-//}
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        // Delete the row from the data source
-////        delete(name: "ddd");
-//        
-//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//    }
-//}
 
-//-(void)deleteAllObjects: (NSString *)name{
-//    NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"Waiter"];
-//    NSError *error;
-//    NSArray *items =[self.managedObjectContext executeFetchRequest:request error:&error];
-//    
-//    for (NSManagedObject *managedObject in items) {
-//        [self.managedObjectContext deleteObject:managedObject];
-//    }
-//    if(![self.managedObjectContext save:&error]){
-//        NSLog(@"Error deleting: %@ - error: %@",entityName,error);
-//    }
-//}
 @end

@@ -62,6 +62,9 @@ class WaiterViewController: UIViewController {
         if let name = delegate?.getName() {
             waiterName.text = name
         }
+        if let shifts = delegate?.getShifts() {
+            self.shifts = shifts
+        }
         showShiftList()
     }
     
