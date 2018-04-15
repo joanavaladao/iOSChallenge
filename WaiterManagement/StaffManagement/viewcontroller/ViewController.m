@@ -28,7 +28,6 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
     self.restaurant = [[RestaurantManager sharedManager]currentRestaurant];
     self.waiters = [self.restaurant.staff sortedArrayUsingDescriptors:@[sortByName]];
-//    self.navigationItem.title = @"Waiters";
     
     // Do any additional setup after loading the view, typically from a nib.
 }

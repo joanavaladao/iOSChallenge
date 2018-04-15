@@ -13,7 +13,7 @@ protocol WaiterDelegate {
     func deleteWaiter(_ name: String)
     func getName() -> String
     func getShifts() -> [ShiftStructure]
-    func showReport() -> (Int, [Waiter])
+    func getAllShifts() -> (Bool, [ShiftStructure])
 }
 
 
@@ -125,14 +125,22 @@ extension ViewController: WaiterDelegate {
         return result
     }
     
-    func showReport() -> (Int, [Waiter]) {
-        var result: [Waiter] = []
-        var errors: Int = 0
+    func getAllShifts() -> (Bool, [ShiftStructure]){
+        var result: [ShiftStructure] = []
+        var errors: Bool = false
         for waiter in waiters {
             if let waiter = waiter as? Waiter {
-                result.append(waiter)
+                if let shifts = waiter.shifts {
+                    for shift in shifts {
+                        if let shift = shift as? Shift {
+                            result.append(ShiftStructure(id: shift.id as! Int, startDate: shift.startTime, endDate: shift.endTime))
+                        } else {
+                            errors = true
+                        }
+                    }
+                }
             } else {
-                errors += 1
+                errors = true
             }
         }
         return (errors, result)

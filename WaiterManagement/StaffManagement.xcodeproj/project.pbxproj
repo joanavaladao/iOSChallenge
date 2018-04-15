@@ -11,6 +11,7 @@
 		5B2F3E332083908C001D6AD2 /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F3E322083908C001D6AD2 /* DateTableViewCell.swift */; };
 		5B2F3E3520839FCF001D6AD2 /* TwoButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F3E3420839FCF001D6AD2 /* TwoButtonsTableViewCell.swift */; };
 		5B2F3E372083ADBF001D6AD2 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F3E362083ADBF001D6AD2 /* ReportViewController.swift */; };
+		5B2F3E3E2083EBB7001D6AD2 /* ReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F3E3D2083EBB7001D6AD2 /* ReportTableViewCell.swift */; };
 		5B5D61E82082AB0E001CA81B /* Shift.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D61E72082AB0E001CA81B /* Shift.m */; };
 		5B5D61EA208322E1001CA81B /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D61E9208322E1001CA81B /* ButtonTableViewCell.swift */; };
 		5B7D8F56208235CA00231072 /* ShiftListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7D8F55208235CA00231072 /* ShiftListViewController.swift */; };
@@ -47,6 +48,7 @@
 		5B2F3E322083908C001D6AD2 /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
 		5B2F3E3420839FCF001D6AD2 /* TwoButtonsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonsTableViewCell.swift; sourceTree = "<group>"; };
 		5B2F3E362083ADBF001D6AD2 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		5B2F3E3D2083EBB7001D6AD2 /* ReportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewCell.swift; sourceTree = "<group>"; };
 		5B5D61E62082AAFC001CA81B /* Shift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shift.h; sourceTree = "<group>"; };
 		5B5D61E72082AB0E001CA81B /* Shift.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Shift.m; sourceTree = "<group>"; };
 		5B5D61E9208322E1001CA81B /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				5B2F3E3020838D70001D6AD2 /* PickerDateTableViewCell.swift */,
 				5B2F3E322083908C001D6AD2 /* DateTableViewCell.swift */,
 				5B2F3E3420839FCF001D6AD2 /* TwoButtonsTableViewCell.swift */,
+				5B2F3E3D2083EBB7001D6AD2 /* ReportTableViewCell.swift */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				5BB87F7C207EF99F00491ABD /* WaiterViewController.swift in Sources */,
 				651CBBD71AB4E31400F265E8 /* RestaurantManager.m in Sources */,
 				5B2F3E372083ADBF001D6AD2 /* ReportViewController.swift in Sources */,
+				5B2F3E3E2083EBB7001D6AD2 /* ReportTableViewCell.swift in Sources */,
 				5B2F3E332083908C001D6AD2 /* DateTableViewCell.swift in Sources */,
 				651CBBB51AB4E1CD00F265E8 /* StaffManagement.xcdatamodeld in Sources */,
 				5BB87F7E207F096000491ABD /* Protocols.swift in Sources */,
