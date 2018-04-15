@@ -47,13 +47,17 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
             let delegate = delegate {
             let index = indexPath.row
             let shift = delegate.shiftAt(index)
-            cell.startShiftLabel.text = shift?.start.description(with: .current)
-            cell.endShiftLabel.text = shift?.end.description(with: .current)
+            if let start = shift?.start,
+                let end = shift?.end {
+                cell.startShiftLabel.text = formatDate(date: start)
+                cell.endShiftLabel.text = formatDate(date: end)
+            }
             return cell
         }
-        
         return UITableViewCell()
     }
+    
+    
     
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if let delegate = delegate,
@@ -61,6 +65,10 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
             delegate.deleteShift(shift, index: indexPath.row)
             tableView.reloadData()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
     
 
@@ -73,6 +81,35 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    private func formatDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM, dd HH:mm"
+        var dateString = dateFormatter.string(from:date)
+        
+        let weekday = Calendar.current.component(.weekday, from: date)
+        var weekdayString: String
+        switch weekday {
+        case 1:
+            weekdayString = "Sunday"
+        case 2:
+            weekdayString = "Monday"
+        case 3:
+            weekdayString = "Tuesday"
+        case 4:
+            weekdayString = "Wednesday"
+        case 5:
+            weekdayString = "Thursday"
+        case 6:
+            weekdayString = "Friday"
+        case 7:
+            weekdayString = "Saturday"
+        default:
+            weekdayString = ""
+        }
+        return "\(weekdayString), \(dateString)"
+    }
 
 }
 

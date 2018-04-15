@@ -15,6 +15,7 @@ protocol ShiftDataDelegate {
     func quantityOfShifts() -> Int
     func shiftAt(_ index: Int) -> ShiftStructure?
     func deleteShift(_ shift: ShiftStructure, index: Int)
+    func isNewWaiter(_ isNew: Bool)
 }
 
 struct ShiftStructure {
@@ -42,6 +43,7 @@ class WaiterViewController: UIViewController {
     var shiftList: ShiftListDelegate?
     var shiftDetail: ShiftDetailDelegate?
     var shifts: [ShiftStructure] = []
+    var isNewWaiter: Bool = true
     
     @IBOutlet weak var waiterName: UITextField!
     @IBOutlet weak var shiftListContainer: UIView!
@@ -50,7 +52,13 @@ class WaiterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButton))
-        showData()
+        if isNewWaiter {
+            cleanScreen()
+            self.navigationItem.title = "Add Waiter"
+        } else {
+            showData()
+            self.navigationItem.title = ""
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,6 +74,13 @@ class WaiterViewController: UIViewController {
             self.shifts = shifts
         }
         showShiftList()
+    }
+    
+    private func cleanScreen() {
+        shifts = []
+        name = ""
+        waiterName.text = ""
+        shiftList?.reload()
     }
     
     @objc private func saveButton() {
@@ -184,5 +199,9 @@ extension WaiterViewController: ShiftDataDelegate {
         } else {
             // Fallback on earlier versions
         }
+    }
+    
+    func isNewWaiter(_ isNew: Bool) {
+        self.isNewWaiter = isNew
     }
 }

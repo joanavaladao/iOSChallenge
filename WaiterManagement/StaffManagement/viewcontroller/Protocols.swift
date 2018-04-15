@@ -20,6 +20,11 @@ extension ViewController {
     override open func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let view = segue.destination as? WaiterViewController {
             view.delegate = self
+            if segue.identifier == "showWaiter" {
+                view.isNewWaiter(false)
+            } else {
+                view.isNewWaiter(true)
+            }
         }
     }
     
@@ -31,9 +36,6 @@ extension ViewController {
             navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
             self.navigationItem.title = "Waiters"
         }
-        
-        
-        
     }
  
 }
