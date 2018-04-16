@@ -15,5 +15,15 @@
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) Restaurant *restaurant;
+@property (nonatomic, retain) NSSet *shifts;
+@end
+
+
+@interface Waiter (CoreDataGeneratedAccessors)
+
+- (void)addShiftsObject:(NSManagedObject *)value;
+- (void)removeShiftsObject:(NSManagedObject *)value;
+- (void)addShifts:(NSSet *)values;
+- (void)removeShifts:(NSSet *)values;
 
 @end
