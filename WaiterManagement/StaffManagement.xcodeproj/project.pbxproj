@@ -253,6 +253,7 @@
 				TargetAttributes = {
 					651CBBA81AB4E1CC00F265E8 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 2VUKR9KTHP;
 						LastSwiftMigration = 0930;
 					};
 					651CBBC41AB4E1CD00F265E8 = {
@@ -466,10 +467,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 2VUKR9KTHP;
 				INFOPLIST_FILE = StaffManagement/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TouchBistro.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.joana.challenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "StaffManagement/viewcontroller/StaffManagement-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -483,10 +485,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 2VUKR9KTHP;
 				INFOPLIST_FILE = StaffManagement/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TouchBistro.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.joana.challenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "StaffManagement/viewcontroller/StaffManagement-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

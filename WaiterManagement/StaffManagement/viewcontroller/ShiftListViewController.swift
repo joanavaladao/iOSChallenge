@@ -33,7 +33,6 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(section)
         if section == 0 {
             if let delegate = delegate {
                 return delegate.quantityOfShifts()
@@ -102,6 +101,12 @@ class ShiftListViewController: UIViewController, UITableViewDelegate, UITableVie
         view.tintColor = UIColor(red: 214.0/255.0, green: 214.0/255.0, blue: 214.0/255.0, alpha: 1.0)
         if let header = view as? UITableViewHeaderFooterView {
             header.textLabel?.font = UIFont(descriptor: UIFontDescriptor(name: "System", size: 14.0), size: 14.0)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let delegate = delegate {
+            delegate.resignResponder()
         }
     }
 }

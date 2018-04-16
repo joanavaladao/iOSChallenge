@@ -16,6 +16,7 @@ protocol ShiftDataDelegate {
     func shiftAt(_ index: Int) -> ShiftStructure?
     func deleteShift(_ shift: ShiftStructure, index: Int)
     func isNewWaiter(_ isNew: Bool)
+    func resignResponder()
 }
 
 struct ShiftStructure {
@@ -36,7 +37,7 @@ struct ShiftStructure {
     }
 }
 
-class WaiterViewController: UIViewController {
+class WaiterViewController: UIViewController, UITextFieldDelegate {
 
     var delegate: WaiterDelegate?
     var name: String?
@@ -55,6 +56,7 @@ class WaiterViewController: UIViewController {
         super.viewDidLoad()
         navigationSaveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButton))
         navigationItem.rightBarButtonItem = navigationSaveButton
+        waiterName.delegate = self
         if isNewWaiter {
             cleanScreen()
             self.navigationItem.title = "Add Waiter"
@@ -70,6 +72,10 @@ class WaiterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        waiterName.resignFirstResponder()
+    }
+    
     private func showData() {
         if let name = delegate?.getName() {
             waiterName.text = name
@@ -77,6 +83,7 @@ class WaiterViewController: UIViewController {
         if let shifts = delegate?.getShifts() {
             self.shifts = shifts
         }
+        waiterName.isEnabled = false
         showShiftList()
     }
     
@@ -84,6 +91,7 @@ class WaiterViewController: UIViewController {
         shifts = []
         name = ""
         waiterName.text = ""
+        waiterName.isEnabled = true
         shiftList?.reload()
     }
     
@@ -233,5 +241,9 @@ extension WaiterViewController: ShiftDataDelegate {
     
     func isNewWaiter(_ isNew: Bool) {
         self.isNewWaiter = isNew
+    }
+    
+    func resignResponder() {
+        waiterName.resignFirstResponder()
     }
 }

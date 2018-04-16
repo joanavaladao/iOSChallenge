@@ -158,6 +158,10 @@ extension ShiftDetailViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let delegate = delegate {
+            delegate.resignResponder()
+        }
+        
         let index = indexPath.row
         if index == 0 {
             visiblePicker = visiblePicker == 1 ? 0 : 1
